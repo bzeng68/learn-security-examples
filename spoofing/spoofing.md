@@ -30,5 +30,15 @@ This example demonstrates spoofind through two ways -- Stealing cookies programm
 ## For you to answer
 
 1. Briefly explain the spoofing vulnerability in **insecure.ts**.
+Spoofing vulnerability is when attackers are able to identify as other people using their data in order
+to gain unauthorized access. Due to lack of HttpOnly and SameSite attributes for the cookies used in 
+sessions in insecure.ts, the file is vulnerable to these types of attacks as attributes for the cookies provided by the session are not restrictive enough.
+
 2. Briefly explain different ways in which vulnerability can be exploited.
+This spoofing vulnerability can be exploited by either session hijacking or CSRF. Session hijacking refers to obtaining the cookies for a session and using the cookies to identify as a user to perform unauthorized requests. This can be done in insecure.ts by creating a link that has JavaScript in it, which runs and logs the cookie data of the user once they have clicked on the link. Meanwhile, CSRF refers to cross-site request forgery, which can be done in insecure.ts by creating a form that is automatically submitted once a user loads the site. This form sends a request to the server as the user who loaded the malicious site, allowing them to use their cookie in the request.
+
 3. Briefly explain why **secure.ts** does not have the spoofing vulnerability in **insecure.ts**.
+Secure.ts does not have the spoofing vulnerability in insecure.ts because it uses the HttpOnly
+and SameSite attributes of session cookies such that it prevents access of cookies from anything besides
+HTTP requests/responses and prevents cookies from being used in requests that do not originate from
+the site that had provided the cookies initially.

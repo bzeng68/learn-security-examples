@@ -31,5 +31,10 @@ This will create a database in MongoDB called __infodisclosure__. Verify its pre
 Answer the following:
 
 1. Briefly explain the potential vulnerabilities in **insecure.ts**
+Information disclosure vulnerability means that attackers are able to obtain personal or system sensitive information without authorization. Insecure.ts directly references an unverified and unsanitized request within a query to the database collection User that contains sensitive login information in the form of usernames and passwords.
+
 2. Briefly explain how a malicious attacker can exploit them.
+A malicious attacker could exploit this vulnerability by performing a SQL or noSQL injection on the application. These injections are when attackers input database commands into their request instead of an real and allowed input. This allows them to be able to access database documents and subsequently use that information nefariously. For example, an attacker could use this to access someone's login information and then log into their account to purchase things using their saved payment methods.
+
 3. Briefly explain the defensive techniques used in **secure.ts** to prevent the information disclosure vulnerability?
+Secure.ts prevents information disclosure by sanitizing the input from the request. It first type checks that the input is a string and follows that up by using regex to remove any non-alphanumeric values from the string. This means that input from the user is known to be an allowed string before it is used to access the database, protecting the database from unauthorized disclosure or leakage.
